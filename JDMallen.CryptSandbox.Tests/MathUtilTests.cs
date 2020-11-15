@@ -48,5 +48,20 @@ namespace JDMallen.CryptSandbox.Tests
 			var actual = MathUtil.PrimitiveRootsModuloN(n1);
 			Assert.Equal(expected, actual);
 		}
+
+		[Fact]
+		public void IsPrime()
+		{
+			var testValues = Enumerable.Range(0, 100);
+			var primeValues = new HashSet<long>
+			{
+				2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59,
+				61, 67, 71, 73, 79, 83, 89, 97
+			};
+			var actualValues = testValues.Where(i => MathUtil.IsPrime(i))
+				.Select(value => (long) value)
+				.ToHashSet();
+			Assert.Equal(primeValues, actualValues);
+		}
 	}
 }

@@ -14,8 +14,38 @@ namespace JDMallen.CryptSandbox
 				: EuclidGcd(smaller, remainder);
 		}
 
+		public static bool IsPrime(long n)
+		{
+			if (n < 2)
+			{
+				return false;
+			}
+
+			if (n % 2 == 0)
+			{
+				return n == 2;
+			}
+
+			var root = (int) Math.Sqrt(n);
+
+			for (var i = 3; i <= root; i += 2)
+			{
+				if (n % i == 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public static long EulerTotient(long n)
 		{
+			if (IsPrime(n))
+			{
+				return n - 1;
+			}
+
 			var result = 0;
 			for (var i = 1; i < n; i++)
 			{
